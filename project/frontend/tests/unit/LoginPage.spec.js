@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import LoginPage from '@/views/LoginPage'
 
 describe('LoginPage.vue', () => {
