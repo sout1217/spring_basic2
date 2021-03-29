@@ -148,7 +148,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <workingDirectory>${basedir}/../front-end</workingDirectory> <!-- 작업할 영역 설정 -->
+                    <workingDirectory>${basedir}/../frontend</workingDirectory> <!-- 작업할 영역 설정 -->
                 </configuration>
             </plugin>
             <plugin>
@@ -166,7 +166,7 @@
                             <outputDirectory>${basedir}/src/main/resources/templates</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/../front-end/dist</directory>
+                                    <directory>${basedir}/../frontend/dist</directory>
                                     <includes>
                                         <include>index.html</include>
                                     </includes>
@@ -184,7 +184,7 @@
                             <outputDirectory>${basedir}/src/main/resources/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>front-end/dist</directory>
+                                    <directory>${basedir}/../frontend/dist</directory>
                                     <excludes>
                                         <exclude>index.html</exclude>
                                     </excludes>
@@ -202,7 +202,7 @@
                             <outputDirectory>${basedir}/target/classes/templates</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/../front-end/dist</directory>
+                                    <directory>${basedir}/../frontend/dist</directory>
                                     <includes>
                                         <include>index.html</include>
                                     </includes>
@@ -220,7 +220,7 @@
                             <outputDirectory>${basedir}/target/classes/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>front-end/dist</directory>
+                                    <directory>${basedir}/../frontend/dist</directory>
                                     <excludes>
                                         <exclude>index.html</exclude>
                                     </excludes>
@@ -229,6 +229,24 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}/src/main/resources/static</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>${basedir}/src/main/resources/templates</directory>
+                            <includes>
+                                <include>index.html</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
             </plugin>
         </plugins>
     </build>

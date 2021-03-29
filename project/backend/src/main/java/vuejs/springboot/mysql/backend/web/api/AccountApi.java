@@ -12,7 +12,7 @@ import vuejs.springboot.mysql.backend.domain.AccountService;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/accounts")
+@RequestMapping("api/v1/accounts")
 @RequiredArgsConstructor
 public class AccountApi {
 

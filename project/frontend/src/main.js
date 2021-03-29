@@ -6,7 +6,7 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = 'http://localhost:8081/v1'
+axios.defaults.baseURL = '/api/v1'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
 
