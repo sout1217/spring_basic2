@@ -14,5 +14,8 @@ spring:
     console:
       enabled: true
 
+  mustache:
+    suffix: .html
+
 server:
   port: 8080
