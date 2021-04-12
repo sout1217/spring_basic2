@@ -5,13 +5,17 @@
   "scripts": {
     "serve": "npm run lint && vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit",
+    "test:unit": "vue-cli-service test:unit --watchAll",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint --fix",
     "test": "npm run test:unit && npm run test:e2e"
   },
   "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
     "core-js": "^3.6.5",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
@@ -34,10 +38,10 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
+    "moxios": "^0.4.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.11",
-    "axios": "^0.21.1"
+    "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
     "root": true,
@@ -71,5 +75,15 @@
   ],
   "jest": {
     "preset": "@vue/cli-plugin-unit-jest"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "useTabs": false,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "printWidth": 80,
+    "bracketSpacing": true,
+    "arrowParens": "avoid"
   }
 }
