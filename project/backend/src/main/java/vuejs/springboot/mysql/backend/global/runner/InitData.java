@@ -1,4 +1,4 @@
-package vuejs.springboot.mysql.backend.runner;
+package vuejs.springboot.mysql.backend.global.runner;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;

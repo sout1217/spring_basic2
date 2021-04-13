@@ -14,11 +14,11 @@ describe('sevices/registration', () => {
     expect.assertions(2)
 
     moxios.wait(() => {
-      let request = moxios.requests.mostRecent()
+      const request = moxios.requests.mostRecent()
       expect(request).toBeTruthy()
       request.respondWith({
         status: 200,
-        response: { result: 'success' },
+        response: { result: 'success' }
       })
     })
 
@@ -31,11 +31,11 @@ describe('sevices/registration', () => {
     expect.assertions(2)
 
     moxios.wait(() => {
-      let request = moxios.requests.mostRecent()
+      const request = moxios.requests.mostRecent()
       expect(request).toBeTruthy()
       request.reject({
         status: 400,
-        response: { message: 'Bad request' },
+        response: { message: 'Bad request' }
       })
     })
 

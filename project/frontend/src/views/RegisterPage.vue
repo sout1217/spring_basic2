@@ -31,10 +31,31 @@
 </template>
 
 <script>
-  import registrationService from '../services/registration'
+import registrationService from '../services/registration'
+import { required, email, minLength, maxLength, alphaNum } from 'vuelidate/lib/validators'
 
 export default {
   name: 'RegisterPage',
+  validations: {
+    form: {
+      username: {
+        required,
+        minLength: minLength(2),
+        maxLength: maxLength(50),
+        alphaNum
+      },
+      emailAddress: {
+        required,
+        email,
+        maxLength: maxLength(100)
+      },
+      password: {
+        required,
+        minLength: minLength(6),
+        maxLength: maxLength(30)
+      }
+    }
+  },
   data () {
     return {
       form: {
@@ -46,9 +67,15 @@ export default {
     }
   },
   methods: {
-    submitForm() {
+    submitForm () {
+      this.$v.$touch()
+      if (this.$v.$invalid) {
+        console.log('유효성 검사 실패')
+        return
+      }
+
       registrationService.register(this.form).then(() => {
-        this.$router.push( {name: 'LoginPage'} )
+        this.$router.push({ name: 'LoginPage' })
       }).catch(error => {
         this.errorMessage = 'Failed to register user ' + (error.message ? error.message : 'unknown')
       })
