@@ -1,7 +1,9 @@
-package vuejs.springboot.mysql.backend.domain;
+package vuejs.springboot.mysql.backend.domain.model.account.domainService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import vuejs.springboot.mysql.backend.domain.model.account.Account;
+import vuejs.springboot.mysql.backend.domain.model.account.AccountRepository;
 
 import java.util.List;
 
@@ -12,6 +14,6 @@ public class AccountService {
     private final AccountRepository accountRepository;
 
     public List<Account> getAccounts() {
-        return accountRepository.findAll();
+        return null;
     }
 }

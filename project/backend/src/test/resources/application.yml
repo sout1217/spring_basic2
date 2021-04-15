@@ -9,6 +9,10 @@ spring:
       ddl-auto: create
     show-sql: true
     open-in-view: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
 
   h2:
     console:
@@ -18,4 +22,4 @@ spring:
     suffix: .html
 
 server:
-  port: 8089
+  port: 8080

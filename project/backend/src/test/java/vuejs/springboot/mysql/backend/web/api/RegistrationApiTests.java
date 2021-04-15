@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import vuejs.springboot.mysql.backend.domain.application.service.UserService;
 import vuejs.springboot.mysql.backend.global.error.EmailAddressExistsException;
-import vuejs.springboot.mysql.backend.global.error.UsernameExistException;
+import vuejs.springboot.mysql.backend.global.error.UsernameExistsException;
 import vuejs.springboot.mysql.backend.web.request.RegistrationPayload;
 
 import static org.mockito.Mockito.doNothing;
@@ -53,7 +53,7 @@ class RegistrationApiTests {
                 .build();
 
         // userService.rgister(payload.toCommand()) 가 호출 될 때 Exception 을 발생시킨다
-        doThrow(UsernameExistException.class)
+        doThrow(UsernameExistsException.class)
                 .when(userService)
                 .register(payload.toCommand())
         ;

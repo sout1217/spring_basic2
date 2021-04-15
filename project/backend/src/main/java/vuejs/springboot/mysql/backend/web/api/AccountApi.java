@@ -2,12 +2,11 @@ package vuejs.springboot.mysql.backend.web.api;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vuejs.springboot.mysql.backend.domain.Account;
-import vuejs.springboot.mysql.backend.domain.AccountService;
+import vuejs.springboot.mysql.backend.domain.model.account.Account;
+import vuejs.springboot.mysql.backend.domain.model.account.domainService.AccountService;
 
 import java.util.List;
 

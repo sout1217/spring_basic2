@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
       log.error(e.getMessage());
 
         String errorMessage = "Registration failed";
-        if (e instanceof UsernameExistException) {
+        if (e instanceof UsernameExistsException) {
             errorMessage = "Username already exists";
         } else if (e instanceof EmailAddressExistsException) {
             errorMessage = "Email address already exists";
