@@ -27,7 +27,8 @@ public class Account {
     @Column(name="email_address", nullable = false, length = 100, unique = true)
     private String emailAddress;
 
-    @Column(name="password", nullable = false, length = 30)
+    // 암호화 시 길이가 60글자 되기 때문에 변경하였음
+    @Column(name="password", nullable = false, length = 60)
     private String password;
 
     @Column(name="first_name", nullable = false, length = 45)

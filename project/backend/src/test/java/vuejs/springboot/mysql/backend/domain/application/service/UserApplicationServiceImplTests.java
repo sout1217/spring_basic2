@@ -1,7 +1,6 @@
 package vuejs.springboot.mysql.backend.domain.application.service;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +11,7 @@ import vuejs.springboot.mysql.backend.domain.application.command.RegistrationCom
 import vuejs.springboot.mysql.backend.domain.application.common.event.DomainEventPublisher;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.MailManager;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.MessageVariable;
+import vuejs.springboot.mysql.backend.domain.application.service.impl.UserApplicationServiceImpl;
 import vuejs.springboot.mysql.backend.domain.model.account.Account;
 import vuejs.springboot.mysql.backend.domain.model.account.domainService.RegistrationManagement;
 import vuejs.springboot.mysql.backend.domain.model.account.events.event.AccountRegisteredEvent;
@@ -22,7 +22,7 @@ import vuejs.springboot.mysql.backend.global.error.UsernameExistsException;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class UserServiceTests {
+class UserApplicationServiceImplTests {
 
     @Mock
     private MailManager mailManager;
@@ -34,14 +34,14 @@ class UserServiceTests {
     private RegistrationManagement registrationManagement;
 
     @InjectMocks
-    private UserService userService;
+    private UserApplicationServiceImpl userApplicationServiceImpl;
 
     @Test
     @DisplayName("register 메소드의 null 인자가 들어가는 경우 실패해야합니다.")
     void register_nullCommand_shouldFail() {
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            userService.register(null);
+            userApplicationServiceImpl.register(null);
         });
     }
 
@@ -58,7 +58,7 @@ class UserServiceTests {
         RegistrationCommand command = new RegistrationCommand(username, emailAddress, password);
 
         Assertions.assertThrows(RegistrationException.class, () -> {
-            userService.register(command);
+            userApplicationServiceImpl.register(command);
         });
 
     }
@@ -75,7 +75,7 @@ class UserServiceTests {
         RegistrationCommand command = new RegistrationCommand(username, emailAddress, password);
 
         Assertions.assertThrows(RegistrationException.class, () -> {
-            userService.register(command);
+            userApplicationServiceImpl.register(command);
         });
     }
 
@@ -97,7 +97,7 @@ class UserServiceTests {
 
         // when
         RegistrationCommand command = new RegistrationCommand(username, emailAddress, password);
-        userService.register(command);
+        userApplicationServiceImpl.register(command);
 
         // then
         verify(mailManager).send(

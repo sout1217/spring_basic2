@@ -18,4 +18,11 @@ spring:
     suffix: .html
 
 server:
-  port: 8089
+  port: 8080
+
+logging:
+  level:
+    org.springframework.security: debug
+
+app:
+  mail-from: "sout1217@gmail.com"

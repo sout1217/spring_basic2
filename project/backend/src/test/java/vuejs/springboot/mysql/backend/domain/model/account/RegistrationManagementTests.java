@@ -115,5 +115,6 @@ class RegistrationManagementTests {
 
         // then
         Assertions.assertEquals(encryptPassword, savedAccount.getPassword(), "저장된 계정의 비밀번호와 암호화된 비밀번호가 서로 같아야 한다");
+
     }
 }

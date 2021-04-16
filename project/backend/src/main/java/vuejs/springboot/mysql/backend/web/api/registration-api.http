@@ -1,0 +1,18 @@
+POST http://localhost:8080/api/registrations
+Content-Type: application/json
+
+{
+  "username": "root",
+  "emailAddress": "root@gmail.com",
+  "password": "rootroot"
+}
+
+###
+
+POST http://localhost:8080/api/authentications
+Content-Type: application/json
+
+{
+  "username": "root",
+  "password": "rootroot"
+}

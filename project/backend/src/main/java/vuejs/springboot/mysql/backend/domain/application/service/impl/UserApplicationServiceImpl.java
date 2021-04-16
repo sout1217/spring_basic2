@@ -1,4 +1,4 @@
-package vuejs.springboot.mysql.backend.domain.application.service;
+package vuejs.springboot.mysql.backend.domain.application.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +9,7 @@ import vuejs.springboot.mysql.backend.domain.application.command.RegistrationCom
 import vuejs.springboot.mysql.backend.domain.application.common.event.DomainEventPublisher;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.MailManager;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.MessageVariable;
+import vuejs.springboot.mysql.backend.domain.application.service.UserApplicationService;
 import vuejs.springboot.mysql.backend.domain.model.account.Account;
 import vuejs.springboot.mysql.backend.domain.model.account.domainService.RegistrationManagement;
 import vuejs.springboot.mysql.backend.domain.model.account.events.event.AccountRegisteredEvent;
@@ -18,13 +19,14 @@ import vuejs.springboot.mysql.backend.global.error.RegistrationException;
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
-public class UserService  {
+public class UserApplicationServiceImpl implements UserApplicationService {
 
     private final RegistrationManagement registrationManagement;
     private final MailManager mailManager;
     private final DomainEventPublisher domainEventPublisher;
 
-    public void register(RegistrationCommand command) throws RegistrationException {
+    @Override
+    public String register(RegistrationCommand command) throws RegistrationException {
         Assert.notNull(command, "command 는 null 이 될 수 없다");
 
         System.out.println(command);
@@ -36,5 +38,7 @@ public class UserService  {
 
         domainEventPublisher.publish(new AccountRegisteredEvent(newAccount));
 
+        // 비밀번호 확인을 위함
+        return newAccount.getPassword();
     }
 }
