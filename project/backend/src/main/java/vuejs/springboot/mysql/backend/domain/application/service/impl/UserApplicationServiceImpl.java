@@ -8,6 +8,7 @@ import org.springframework.util.Assert;
 import vuejs.springboot.mysql.backend.domain.application.command.RegistrationCommand;
 import vuejs.springboot.mysql.backend.domain.application.common.event.DomainEventPublisher;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.MailManager;
+import vuejs.springboot.mysql.backend.domain.application.common.mail.MailTemplate;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.MessageVariable;
 import vuejs.springboot.mysql.backend.domain.application.service.UserApplicationService;
 import vuejs.springboot.mysql.backend.domain.model.account.Account;
@@ -34,7 +35,7 @@ public class UserApplicationServiceImpl implements UserApplicationService {
         Account newAccount = registrationManagement.register(command.getUsername(), command.getEmailAddress(), command.getPassword());
 
         // todo : 이메일 발송 방법 공부했던 곳에서 다시 살펴보기
-        mailManager.send(command.getEmailAddress(), "subject", "template", MessageVariable.from("user", newAccount));
+        mailManager.send(command.getEmailAddress(), "subject", MailTemplate.REGISTER.getFileName(), MessageVariable.from("user", newAccount));
 
         domainEventPublisher.publish(new AccountRegisteredEvent(newAccount));
 

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.boot.autoconfigure.mustache.MustacheResourceTemplateLoader;
+import vuejs.springboot.mysql.backend.domain.model.account.Account;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -18,10 +19,15 @@ class DefaultMailManagerTests {
 
     ArgumentCaptor<Message> messageArgumentCaptor;
 
+    private MustacheResourceTemplateLoader mustacheResourceTemplateLoader;
+    private static final String PREFIX = "classpath:/mail-templates/";
+    private static final String SUFFIX = ".mustache";
+
     @BeforeEach
     void setUp() {
         mailerMock = mock(Mailer.class);
-        defaultMailManager = new DefaultMailManager("sout1217@gmail.com", mailerMock, new MustacheResourceTemplateLoader());
+        mustacheResourceTemplateLoader = new MustacheResourceTemplateLoader(PREFIX, SUFFIX);
+        defaultMailManager = new DefaultMailManager("sout1217@gmail.com", mailerMock, mustacheResourceTemplateLoader);
     }
 
     @Test
@@ -29,7 +35,7 @@ class DefaultMailManagerTests {
     void send_nullEmailAddress_shouldFail() {
         String to = null;
         String subject = "Test subject";
-        String templateName = "/templates/welcome.mustache";
+        String templateName = "welcome";
 
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
             defaultMailManager.send(to, subject, templateName);
@@ -43,7 +49,7 @@ class DefaultMailManagerTests {
     void send_emptyEmailAddress_shouldFail() {
         String to = "";
         String subject = "Test subject";
-        String templateName = "/templates/welcome.mustache";
+        String templateName = "welcome";
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             defaultMailManager.send(to, subject, templateName);
@@ -56,7 +62,7 @@ class DefaultMailManagerTests {
     void send_nullSubject_shouldFail() {
         String to = "sout1217@gmail.com";
         String subject = null;
-        String templateName = "/templates/welcome.mustache";
+        String templateName = "welcome";
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             defaultMailManager.send(to, subject, templateName);
@@ -68,12 +74,11 @@ class DefaultMailManagerTests {
     void send_emptySubject_shouldFail() {
         String to = "sout1217@gmail.com";
         String subject = "";
-        String templateName = "/templates/welcome.mustache";
+        String templateName = "welcome";
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             defaultMailManager.send(to, subject, templateName);
         });
-
     }
 
     @Test
@@ -105,9 +110,14 @@ class DefaultMailManagerTests {
     void send_validParameters_shouldSucceed() {
         String to = "sout1217@gmail.com";
         String subject = "Test subject";
-        String templateName = "/templates/welcome.mustache";
+        String templateName = "welcome";
+        String messageVariableKey = "user";
+        Account messageVariableValue = Account.builder()
+                .username("root")
+                .emailAddress("root@gmail.com")
+                .build();
 
-        defaultMailManager.send(to, subject, templateName, MessageVariable.from("name", "test"));
+        defaultMailManager.send(to, subject, templateName, MessageVariable.from(messageVariableKey, messageVariableValue));
 
         messageArgumentCaptor = ArgumentCaptor.forClass(Message.class);
 
@@ -122,6 +132,9 @@ class DefaultMailManagerTests {
         assertThat("sout1217@gmail.com").isEqualTo(messageSent.getFrom());
 
         System.out.println(messageSent.getBody());
-        assertThat(messageSent.getBody()).contains("<li>Username: test</li>");
+        System.out.println("---------------------------------------------");
+
+        // username 바인딩 검증
+        assertThat(messageSent.getBody()).contains(String.format("<li>Username: %s</li>", messageVariableValue.getUsername()));
     }
 }

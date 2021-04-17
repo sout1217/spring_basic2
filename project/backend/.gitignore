@@ -19,6 +19,7 @@ target/
 *.iml
 *.ipr
 *-dev.yml
+*-beta.yml
 
 ### NetBeans ###
 /nbproject/private/
@@ -33,3 +34,4 @@ build/
 ### VS Code ###
 .vscode/
 
+!/src/main/resources/application-beta.yml

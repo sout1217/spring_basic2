@@ -26,7 +26,7 @@ describe('RegisterPage.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(RegisterPage, {
       localVue,
-      router,
+      router
     })
     fieldUsername = wrapper.find('#username')
     filedEmailAddress = wrapper.find('#emailAddress')
@@ -43,7 +43,6 @@ describe('RegisterPage.vue', () => {
   // 모든 테스트가 끝난 경우 실행
   afterAll(() => {
     jest.restoreAllMocks()
-    jest
   })
 
   test('렌더링 테스트', () => {
@@ -69,8 +68,8 @@ describe('RegisterPage.vue', () => {
       form: {
         username: username,
         emailAddress: emailAddress,
-        password: password,
-      },
+        password: password
+      }
     })
 
     console.log('form username = ', wrapper.vm.form.username)

@@ -1,0 +1,9 @@
+# spring default profile 입니다
+# default application profile 에 active local 로 잡는 경우
+# 스프링 시작 시 프로파일 설정을 local 로 시작합니다
+# -> application-local.html
+# 이 방법외에도 default profile 없이 시작하기 위해서는 mvnw springboot:run -DSpring.active ~ profile = local 로 인자로 주면됩니다
+spring:
+  profiles:
+    active: local
+

@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import vuejs.springboot.mysql.backend.domain.application.command.RegistrationCommand;
 import vuejs.springboot.mysql.backend.domain.application.common.event.DomainEventPublisher;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.MailManager;
+import vuejs.springboot.mysql.backend.domain.application.common.mail.MailTemplate;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.MessageVariable;
 import vuejs.springboot.mysql.backend.domain.application.service.impl.UserApplicationServiceImpl;
 import vuejs.springboot.mysql.backend.domain.model.account.Account;
@@ -103,7 +104,7 @@ class UserApplicationServiceImplTests {
         verify(mailManager).send(
                 emailAddress,
                 "subject",
-                "template",
+                MailTemplate.REGISTER.getFileName(),
                 MessageVariable.from("user", newAccount)
         );
         verify(eventPublisher).publish(new AccountRegisteredEvent(newAccount));

@@ -25,7 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /* static 접근 설정 무시 */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+//        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+        web.ignoring().antMatchers("/static/**", "/js/**", "/css/**", "/images/**", "/favicon.ico");
     }
 
     /* template 접근 권한 설정 */
@@ -35,20 +36,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .cors().disable()
                 .headers().frameOptions().disable()
-            .and()
-                .authorizeRequests()
-                    .antMatchers(PUBLIC).permitAll()
-                    .anyRequest().authenticated()
-            .and()
-                .formLogin()
-                    .loginPage("/login")
-            .and()
-                .logout()
-                    .logoutUrl("/logout")
-                    .logoutSuccessHandler(simpleLogoutSuccessHandler())
-            .and()
-                .addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-        ;
+                .and()
+                .authorizeRequests().anyRequest().permitAll();
+//                    .antMatchers(PUBLIC).permitAll()
+//                    .anyRequest().authenticated()
+//            .and()
+//                .formLogin()
+//                    .loginPage("/login")
+//            .and()
+//                .logout()
+//                    .logoutUrl("/logout")
+//                    .logoutSuccessHandler(simpleLogoutSuccessHandler())
+//            .and()
+//                .addFilterAt(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+//        ;
     }
 
 

@@ -18,8 +18,14 @@ spring:
     console:
       enabled: true
 
-  mustache:
+  thymeleaf:
+    prefix: classpath:/templates/
     suffix: .html
+
+  mustache:
+    prefix: classpath:/
+    suffix: .mustache
+    view-names: "mail-templates/*"
 
 server:
   port: 8080

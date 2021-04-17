@@ -2,7 +2,7 @@ package vuejs.springboot.mysql.backend.domain.application.common.mail;
 
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.mustache.MustacheResourceTemplateLoader;
 import org.springframework.stereotype.Component;
@@ -12,14 +12,20 @@ import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 @Component
-@RequiredArgsConstructor
 public class DefaultMailManager implements MailManager {
 
-    @Value("${app.mail-from}")
-    private final String mailFrom;
-    private final Mailer mailer;
-    private final MustacheResourceTemplateLoader mustacheResourceTemplateLoader;
+
+    private String mailFrom;
+    private Mailer mailer;
+    private MustacheResourceTemplateLoader mustacheResourceTemplateLoader;
+
+    public DefaultMailManager(@Value("{app.mail-from}") String mailFrom, Mailer mailer, MustacheResourceTemplateLoader mustacheResourceTemplateLoader) {
+        this.mailFrom = mailFrom;
+        this.mailer = mailer;
+        this.mustacheResourceTemplateLoader = mustacheResourceTemplateLoader;
+    }
 
     @Override
     public void send(String emailAddress, String subject, String templateName, MessageVariable... variables) {

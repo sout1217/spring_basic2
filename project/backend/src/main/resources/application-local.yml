@@ -1,8 +1,36 @@
+server:
+  port: 8080
+
 spring:
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
 
+  # anaconda 사용하는 경우 anaconda prompt 에서 실행
+  # python -m smtpd -n -c DebuggingServer localhost:1025
+  # python -u -m smtpd -n -c DebuggingServer localhost:1025
+#  mail:
+#    host: localhost
+#    port: 1025
+#    properties:
+#      mail.smtp:
+#        auth: false
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "아이디"
+    password: "패스워드"
+    properties:
+      mail.smtp:
+        ssl:
+          trust: "*"
+        auth: true
+        starttls:
+          enable: true
+        connectiontimeout: 5000
+        timeout: 3000
+        wirtetimeout: 5000
 
   jpa:
     hibernate:
@@ -14,15 +42,18 @@ spring:
     console:
       enabled: true
 
-  mustache:
+  thymeleaf:
+    prefix: classpath:/templates/
     suffix: .html
 
-server:
-  port: 8080
+  mustache:
+    prefix: classpath:/mail-templates/
+    suffix: .mustache
+    view-names: "mail-templates/*"
 
 logging:
   level:
     org.springframework.security: debug
 
 app:
-  mail-from: "sout1217@gmail.com"
+  mail-from: 'sout1217@gmail.com'

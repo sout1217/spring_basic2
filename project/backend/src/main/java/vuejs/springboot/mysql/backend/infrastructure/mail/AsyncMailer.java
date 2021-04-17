@@ -2,15 +2,17 @@ package vuejs.springboot.mysql.backend.infrastructure.mail;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.Mailer;
 import vuejs.springboot.mysql.backend.domain.application.common.mail.Message;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 @Slf4j
 @Component
@@ -25,24 +27,26 @@ public class AsyncMailer implements Mailer {
         Assert.notNull(message,"message 는 반드시 있어야 한다");
 
         try {
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            // hmtl 태그를 사용하여 전송하기 위해 이런 방식으로 진행하였음
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
 
             if (StringUtils.hasText(message.getFrom())) {
-                mailMessage.setFrom(message.getFrom());
+                helper.setFrom(message.getFrom());
             }
             if (StringUtils.hasText(message.getSubject())) {
-                mailMessage.setSubject(message.getSubject());
+                helper.setSubject(message.getSubject());
             }
             if (StringUtils.hasText(message.getBody())) {
-                mailMessage.setText(message.getBody());
+                helper.setText(message.getBody(), true);
             }
             if (StringUtils.hasText(message.getTo())) {
-                mailMessage.setTo(message.getTo());
+                helper.setTo(message.getTo());
             }
 
-            mailSender.send(mailMessage);
+            mailSender.send(helper.getMimeMessage());
 
-        } catch (MailException e) {
+        } catch (MessagingException e) {
             log.error("메일 전송 실패", e);
         }
     }
