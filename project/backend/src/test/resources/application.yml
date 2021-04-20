@@ -27,6 +27,22 @@ spring:
     suffix: .mustache
     view-names: "mail-templates/*"
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "아이디@gmail.com"
+    password: "비밀번호"
+    properties:
+      mail.smtp:
+        ssl:
+          trust: "*"
+        auth: true
+        starttls:
+          enable: true
+        connectiontimeout: 5000
+        timeout: 3000
+        wirtetimeout: 5000
+
 server:
   port: 8080
 

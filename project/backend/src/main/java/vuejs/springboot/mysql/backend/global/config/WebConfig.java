@@ -10,6 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8080"); // 프론트 엔드에서 요청 주소
+                .allowedOrigins("http://localhost:3000"); // 프론트 엔드에서 요청 주소
     }
 }

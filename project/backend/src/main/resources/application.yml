@@ -5,5 +5,5 @@
 # 이 방법외에도 default profile 없이 시작하기 위해서는 mvnw springboot:run -DSpring.active ~ profile = local 로 인자로 주면됩니다
 spring:
   profiles:
-    active: local
+    active: beta
 

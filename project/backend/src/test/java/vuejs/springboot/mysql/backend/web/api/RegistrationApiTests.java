@@ -1,36 +1,41 @@
 package vuejs.springboot.mysql.backend.web.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 import vuejs.springboot.mysql.backend.domain.application.service.impl.UserApplicationServiceImpl;
-import vuejs.springboot.mysql.backend.global.config.WebSecurityConfig;
 import vuejs.springboot.mysql.backend.global.error.EmailAddressExistsException;
-import vuejs.springboot.mysql.backend.global.error.GlobalExceptionHandler;
 import vuejs.springboot.mysql.backend.global.error.UsernameExistsException;
 import vuejs.springboot.mysql.backend.web.request.RegistrationPayload;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { RegistrationApi.class, WebSecurityConfig.class, GlobalExceptionHandler.class})
-@WebMvcTest(RegistrationApi.class)
+@SpringBootTest
 class RegistrationApiTests {
 
-    @Autowired
+//    @TestConfiguration
+//    static class config {
+//        @Bean
+//        public JavaMailSender mailSender() {
+//            return new JavaMailSenderImpl();
+//        }
+//    }
+
     private MockMvc mvc;
 
     @Autowired
@@ -39,11 +44,19 @@ class RegistrationApiTests {
     @MockBean
     private UserApplicationServiceImpl userApplicationServiceImpl;
 
+    @BeforeEach
+    void setUp(@Autowired WebApplicationContext context) {
+        this.mvc = MockMvcBuilders.webAppContextSetup(context)
+                .apply(springSecurity())
+                .alwaysDo(print())
+                .build();
+    }
+
     @Test
     @DisplayName("빈 페이로드를 등록하면 실패하고 400을 반환해야합니다.")
     void register_blankPayload_shouldFailAndReturn400() throws Exception {
 
-        mvc.perform(post("/api/registrations"))
+        mvc.perform(post("/api/v1/registrations"))
                 .andExpect(status().is(400));
     }
 
@@ -64,7 +77,7 @@ class RegistrationApiTests {
         ;
 
         mvc.perform(
-                post("/api/registrations")
+                post("/api/v1/registrations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(payload)))
                 .andExpect(status().is(400))
@@ -89,7 +102,7 @@ class RegistrationApiTests {
         ;
 
         mvc.perform(
-                post("/api/registrations")
+                post("/api/v1/registrations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(payload)))
                 .andExpect(status().is(400))
@@ -116,7 +129,7 @@ class RegistrationApiTests {
         when(userApplicationServiceImpl.register(payload.toCommand())).thenReturn(password);
 
         mvc.perform(
-                post("/api/registrations")
+                post("/api/v1/registrations")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(payload)))
                 .andExpect(status().is(200))

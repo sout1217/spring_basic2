@@ -7,12 +7,15 @@
           <form @submit.prevent="submitForm">
             <div v-show="errorMessage" class="alert alert-danger failed">{{ errorMessage }}</div>
             <div class="from-group">
+              <label for="username">username</label>
               <input id="username" type="text" v-model="form.username">
             </div>
             <div class="from-group">
+              <label for="emailAddress">emailAddress</label>
               <input id="emailAddress" type="text" v-model="form.emailAddress">
             </div>
             <div class="from-group">
+              <label for="password">password</label>
               <input id="password" type="text" v-model="form.password">
             </div>
             <button type="submit" class="btn btn-primary btn-block">SignUp</button>

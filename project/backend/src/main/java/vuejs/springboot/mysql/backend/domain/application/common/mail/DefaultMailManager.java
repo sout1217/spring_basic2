@@ -16,7 +16,6 @@ import java.util.Map;
 @Component
 public class DefaultMailManager implements MailManager {
 
-
     private String mailFrom;
     private Mailer mailer;
     private MustacheResourceTemplateLoader mustacheResourceTemplateLoader;

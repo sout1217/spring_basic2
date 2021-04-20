@@ -21,7 +21,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
     private final ObjectMapper MAPPER = new ObjectMapper();
 
     public AuthenticationFilter() {
-        super(new AntPathRequestMatcher("/api/authentications", "POST"));
+        super(new AntPathRequestMatcher("/api/v1/authentications", "POST"));
     }
 
     @Override

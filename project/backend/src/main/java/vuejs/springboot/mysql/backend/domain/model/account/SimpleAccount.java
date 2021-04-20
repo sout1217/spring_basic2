@@ -26,7 +26,7 @@ public class SimpleAccount implements UserDetails {
     }
 
     public static UserDetails create(Account findAccount) {
-        return new SimpleAccount(findAccount.getId(), findAccount.getUsername(), findAccount.getEmailAddress());
+        return new SimpleAccount(findAccount.getId(), findAccount.getUsername(), findAccount.getPassword());
     }
 
     @Override
