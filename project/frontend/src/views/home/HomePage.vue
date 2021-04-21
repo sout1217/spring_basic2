@@ -27,7 +27,6 @@ export default {
 <style>
 .board-container {
   padding: 0 35px;
-  outline: 1px solid red;
 }
 .board-container h2 {
   font-size: 18px;
@@ -35,25 +34,44 @@ export default {
   font-weight: 400;
 }
 .board-container .boards-section {
-  outline: 1px solid orange;
 }
 
 .board-container .boards-section .boards {
-  outline: 1px solid green;
+  margin: 30px 10px;
 }
 
 .board-container .boards-section .boards .board {
-  outline: 1px solid deepskyblue;
+  width: 270px;
+  height: 110px;
+  border-right: 5px;
+  background-color: #377ef6;
+  color: #fff;
+  padding: 15px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .board-container .boards-section .boards h3 {
+  font-size: 16px;
 }
 .board-container .boards-section .boards p {
+  line-height: 1.2;
+  font-size: 90%;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .board-container .boards-section .boards .add {
+  background-color: #f4f4f4;
+  color: #666;
+  text-align: center;
+  padding-top: 30px;
+  font-weight: 400;
 }
 
 .board-container .create-team-wrapper .btn-link {
+  color: #666;
+  text-decoration: underline;
 }
 </style>

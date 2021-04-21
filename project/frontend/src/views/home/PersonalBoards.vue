@@ -4,7 +4,7 @@
       개인 보드
     </h2>
 
-    <div class="boards d-flex">
+    <div class="boards d-flex flex-wrap align-content-center">
       <div class="board list-inline-item">
         <h3>board name1</h3>
         <p>board description</p>
