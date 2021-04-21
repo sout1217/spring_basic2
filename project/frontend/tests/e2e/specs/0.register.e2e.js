@@ -1,12 +1,12 @@
 const user = require('../data/user')
 
 module.exports = {
-  before: function () {
+  before: function() {
     console.log(
-      'user.js 파일을 지우고 랜덤 username 과 랜덤 emailAddress 로 새로 생성 로직'
+      'user.js 파일을 지우고 랜덤 username 과 랜덤 emailAddress 로 새로 생성 로직',
     )
   },
-  'register page renders elements': function (browser) {
+  'register page renders elements': function(browser) {
     const registerPage = browser.page.RegisterPage()
 
     registerPage
@@ -22,7 +22,7 @@ module.exports = {
   },
 
   // 유효하지 않은 데이터로는 회원가입 할 수 없습니다
-  'register with invalid data': function (browser) {
+  'register with invalid data': function(browser) {
     const registerPage = browser.page.RegisterPage()
 
     registerPage.navigate().register('', '', '')
@@ -34,7 +34,7 @@ module.exports = {
   },
 
   // 유효한 데이터로는 회원가입할 수 있습니다
-  'register with valid data': function (browser) {
+  'register with valid data': function(browser) {
     const registerPage = browser.page.RegisterPage()
 
     registerPage
@@ -44,5 +44,5 @@ module.exports = {
 
     browser.pause(2000)
     browser.assert.urlEquals(browser.launchUrl + 'login').end()
-  }
+  },
 }

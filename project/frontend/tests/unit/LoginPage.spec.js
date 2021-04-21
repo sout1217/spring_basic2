@@ -1,7 +1,7 @@
 import { mount, createLocalVue } from '@vue/test-utils'
 import Vuelidate from 'vuelidate'
 import VueRouter from 'vue-router'
-import LoginPage from '@/views/LoginPage'
+import LoginPage from '@/views/login/LoginPage'
 import authenticationService from '@/services/authenticate'
 
 // Setup local Vue with Vuelidate
@@ -23,7 +23,7 @@ describe('LoginPage.vue', () => {
   beforeEach(() => {
     wrapper = mount(LoginPage, {
       localVue,
-      router
+      router,
     })
     fieldUsername = wrapper.find('#username')
     fieldPassword = wrapper.find('#password')
@@ -43,7 +43,12 @@ describe('LoginPage.vue', () => {
 
   // 올바른 내용을 렌더링해야합니다
   it('should render correct contents', () => {
-    expect(wrapper.find('h1').text()).toEqual('LoginPage')
+    expect(wrapper.find('.logo').attributes().src).toEqual('/images/logo.png')
+
+    // element.src 는 주소까지 나옴, 서버 구동 시 테스트할 경우 localhost 가 아니므로 실패 할 수 있다
+    // expect(wrapper.find('.logo').element.src).toEqual(
+    //   'http://localhost/images/logo.png',
+    // )
   })
 
   // 초기 값이있는 데이터 모델을 포함해야합니다.
@@ -60,8 +65,8 @@ describe('LoginPage.vue', () => {
     await wrapper.setData({
       form: {
         username: username,
-        password: password
-      }
+        password: password,
+      },
     })
 
     expect(fieldUsername.element.value).toEqual(username)

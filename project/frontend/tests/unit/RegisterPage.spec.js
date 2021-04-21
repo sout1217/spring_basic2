@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import RegisterPage from '../../src/views/RegisterPage'
+import RegisterPage from '@/views/register/RegisterPage'
 import VueRouter from 'vue-router'
 import Vuelidate from 'vuelidate'
 import registrationService from '../../src/services/registration'
@@ -26,7 +26,7 @@ describe('RegisterPage.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(RegisterPage, {
       localVue,
-      router
+      router,
     })
     fieldUsername = wrapper.find('#username')
     filedEmailAddress = wrapper.find('#emailAddress')
@@ -68,8 +68,8 @@ describe('RegisterPage.vue', () => {
       form: {
         username: username,
         emailAddress: emailAddress,
-        password: password
-      }
+        password: password,
+      },
     })
 
     console.log('form username = ', wrapper.vm.form.username)

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default {
-  register (detail) {
+  register(detail) {
     return new Promise((resolve, reject) => {
       axios
         .post('/registrations', detail)
@@ -12,5 +12,5 @@ export default {
           reject(error)
         })
     })
-  }
+  },
 }

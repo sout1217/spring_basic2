@@ -1,38 +1,38 @@
 module.exports = {
-  url: function () {
+  url: function() {
     return this.api.launchUrl + 'register'
   },
   elements: {
     app: {
-      selector: '#app'
+      selector: '#app',
     },
     // logoImage: {
     //   selector: 'img.logo'
     // },
     usernameInput: {
-      selector: '#username'
+      selector: '#username',
     },
     emailAddressInput: {
-      selector: '#emailAddress'
+      selector: '#emailAddress',
     },
     passwordInput: {
-      selector: '#password'
+      selector: '#password',
     },
     submitButton: {
-      selector: 'button[type=submit]'
+      selector: 'button[type=submit]',
     },
     formError: {
-      selector: '.failed'
-    }
+      selector: '.failed',
+    },
   },
   commands: [
     {
-      register: function (username, emailAddress, password) {
+      register: function(username, emailAddress, password) {
         this.setValue('@usernameInput', username)
           .setValue('@emailAddressInput', emailAddress)
           .setValue('@passwordInput', password)
           .click('@submitButton')
-      }
-    }
-  ]
+      },
+    },
+  ],
 }

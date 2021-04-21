@@ -1,5 +1,5 @@
 export default {
-  authenticate (detail) {
+  authenticate(detail) {
     return new Promise((resolve, reject) => {
       ;(detail.username === 'sunny' ||
         detail.username === 'sunny@taskagile.com') &&
@@ -7,5 +7,5 @@ export default {
         ? resolve({ result: 'success' })
         : reject(new Error('Invalid credentials'))
     })
-  }
+  },
 }

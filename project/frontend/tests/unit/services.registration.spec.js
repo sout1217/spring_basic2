@@ -18,7 +18,7 @@ describe('sevices/registration', () => {
       expect(request).toBeTruthy()
       request.respondWith({
         status: 200,
-        response: { result: 'success' }
+        response: { result: 'success' },
       })
     })
 
@@ -35,7 +35,7 @@ describe('sevices/registration', () => {
       expect(request).toBeTruthy()
       request.reject({
         status: 400,
-        response: { message: 'Bad request' }
+        response: { message: 'Bad request' },
       })
     })
 

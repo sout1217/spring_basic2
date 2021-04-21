@@ -1,11 +1,11 @@
 module.exports = {
-  url: function () {
+  url: function() {
     return this.api.launchUrl
   },
   elements: {
-    pageTitle: '#title'
+    pageTitle: '#title',
     // logoImage: {
     //   selector: '.logo img'
     // }
-  }
+  },
 }

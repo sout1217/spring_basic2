@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default {
-  authenticate (form) {
+  authenticate(form) {
     return new Promise((resolve, reject) => {
       axios
         .post('/authentications', form)
@@ -12,5 +12,5 @@ export default {
           reject(error)
         })
     })
-  }
+  },
 }

@@ -2,7 +2,7 @@ const data = require('../data/user')
 
 module.exports = {
   // 로그인 페이지 렌더링
-  'login page renders elements': function (browser) {
+  'login page renders elements': function(browser) {
     const loginPage = browser.page.LoginPage() // 페이지 오브젝트 인스턴스
     loginPage
       .navigate() // 해당 url 로 이동
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   // email 로 로그인
-  'login with email address': function (browser) {
+  'login with email address': function(browser) {
     const loginPage = browser.page.LoginPage() // 로그인 페이지 인스턴스
     const homePage = browser.page.HomePage() // 홈 페이지 인스턴스
 
@@ -37,7 +37,7 @@ module.exports = {
   },
 
   // username 으로 로그인
-  'login with username': function (browser) {
+  'login with username': function(browser) {
     const loginPage = browser.page.LoginPage() // 로그인 페이지 인스턴스
     const homePage = browser.page.HomePage() // 홈 페이지 인스턴스
 
@@ -57,7 +57,7 @@ module.exports = {
   },
 
   // 유효하지 않은 data 는 로그인에 실패해야 한다
-  'login with invalid credentials': function (browser) {
+  'login with invalid credentials': function(browser) {
     const loginPage = browser.page.LoginPage() // 로그인 페이지 인스턴스
 
     loginPage.navigate().login('not-exist', 'incorrect') // 존재하지 않고 유효하지않는 username 과 password 로 login 메소드 실행
@@ -71,5 +71,5 @@ module.exports = {
     browser.assert
       .urlEquals(browser.launchUrl + 'login') // 현재 url 이 /login 페이지 인지 검사
       .end() // 브라우저 종료
-  }
+  },
 }

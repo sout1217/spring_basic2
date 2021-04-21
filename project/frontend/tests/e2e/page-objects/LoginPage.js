@@ -1,5 +1,5 @@
 module.exports = {
-  url: function () {
+  url: function() {
     return this.api.launch_url + 'login'
   },
   elements: {
@@ -8,15 +8,15 @@ module.exports = {
     usernameInput: '#username',
     passwordInput: '#password',
     submitButton: 'button[type=submit]',
-    formError: '.failed'
+    formError: '.failed',
   },
   commands: [
     {
-      login: function (username, password) {
+      login: function(username, password) {
         this.setValue('@usernameInput', username)
           .setValue('@passwordInput', password)
           .click('@submitButton')
-      }
-    }
-  ]
+      },
+    },
+  ],
 }
