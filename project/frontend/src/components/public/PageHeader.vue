@@ -19,15 +19,27 @@
         <div class="dropdown-menu" aria-labelledby="boardsMenu">
           <div v-show="!hasBoards" class="dropdown-item">보드 없음</div>
           <div v-show="hasBoards">
-            <h6 class="dropdown-header" v-show="personalBoards.length">
+            <h6 class="dropdown-header" v-show="true">
               개인 보드
             </h6>
-            <button class="dropdown-item" type="button">버튼 명 1</button>
-            <button class="dropdown-item" type="button">버튼 명 2</button>
-            <button class="dropdown-item" type="button">버튼 명 3</button>
-            <div>
-              <h6 class="dropdown-header">팀 명</h6>
-              <button class="dropdown-item" type="button">버튼 명</button>
+            <button
+              v-for="board in personalBoards"
+              :key="board.id"
+              class="dropdown-item"
+              type="button"
+            >
+              {{ board.name }}
+            </button>
+            <div v-for="team in teamBoards" :key="'t' + team.id">
+              <h6 class="dropdown-header">{{ team.name }}</h6>
+              <button
+                v-for="board in team.boards"
+                :key="board.id"
+                class="dropdown-item"
+                type="button"
+              >
+                {{ board.name }}
+              </button>
             </div>
           </div>
         </div>
@@ -45,6 +57,9 @@
       </div>
     </div>
 
+    <div>
+      {{ user.name }}
+    </div>
     <div class="profile-menu-toggle">
       <div class="dropdown">
         <button
@@ -69,15 +84,16 @@
 <script>
 // bootstrap 은 config 에서 css 만 잡았으나 js 는 잡지 않았기 때문에 import 를 해주어야 한다
 import 'bootstrap/dist/js/bootstrap.min'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'PageHeader',
-  data() {
-    return {
-      personalBoards: [{}, {}, {}],
-    }
+  created() {
+    this.$store.dispatch('getMyData')
   },
   computed: {
+    ...mapGetters(['user', 'personalBoards', 'teamBoards' /*hasBoards*/]),
+
     hasBoards() {
       return true
     },

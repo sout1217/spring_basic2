@@ -1,0 +1,27 @@
+{
+  "personalBoards": [
+    {
+      "id": 1,
+      "name": "Something Board Name",
+      "description": "Something Board Title"
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "name": "Rose Class",
+      "boards": [
+        {
+          "id": 2,
+          "name": "2021 Something name",
+          "description": "2021 Rose Title"
+        },
+        {
+          "id": 3,
+          "name": "2020 Something name",
+          "description": "2020 Rose Title"
+        }
+      ]
+    }
+  ]
+}

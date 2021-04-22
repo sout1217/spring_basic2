@@ -5,17 +5,13 @@
     </h2>
 
     <div class="boards d-flex flex-wrap align-content-center">
-      <div class="board list-inline-item">
-        <h3>board name1</h3>
-        <p>board description</p>
-      </div>
-      <div class="board list-inline-item">
-        <h3>board name2</h3>
-        <p>board description</p>
-      </div>
-      <div class="board list-inline-item">
-        <h3>board name3</h3>
-        <p>board description</p>
+      <div
+        v-for="board in personalBoards"
+        :key="board.id"
+        class="board list-inline-item"
+      >
+        <h3>{{ board.name }}</h3>
+        <p>{{ board.description }}</p>
       </div>
 
       <div class="board add list-inline-item" @click="createBoard">
@@ -26,7 +22,15 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'BoardsSection',
+  computed: {
+    ...mapGetters(['personalBoards']),
+  },
+  methods: {
+    createBoard() {},
+  },
 }
 </script>

@@ -22,6 +22,9 @@ import TeamBoards from '@/views/home/TeamBoards'
 export default {
   name: 'HomePage',
   components: { TeamBoards, PersonalBoards, PageHeader },
+  methods: {
+    createTeam() {},
+  },
 }
 </script>
 <style>

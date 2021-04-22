@@ -1,0 +1,28 @@
+{
+  "boards": [
+    {
+      "id": 1,
+      "name": "Something Board Name",
+      "description": "Something Board Title",
+      "teamId": 0
+    },
+    {
+      "id": 2,
+      "name": "2021 Something name",
+      "description": "2021 Rose Title",
+      "teamId": 1
+    },
+    {
+      "id": 3,
+      "name": "2020 Something name",
+      "description": "2020 Rose Title",
+      "teamId": 1
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "name": "Rose Class"
+    }
+  ]
+}

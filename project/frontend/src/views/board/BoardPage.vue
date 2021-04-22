@@ -7,6 +7,7 @@
 
 <script>
 import PageHeader from '@/components/public/PageHeader'
+
 export default {
   name: 'BoardPage',
   components: { PageHeader },
