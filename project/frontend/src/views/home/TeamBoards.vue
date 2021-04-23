@@ -34,7 +34,9 @@ export default {
       console.log(board)
     },
     createBoard(team) {
+      console.log('TeamBoard createBoard')
       console.log(team)
+      this.$emit('createBoard', team)
     },
   },
 }

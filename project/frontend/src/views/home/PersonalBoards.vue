@@ -30,7 +30,10 @@ export default {
     ...mapGetters(['personalBoards']),
   },
   methods: {
-    createBoard() {},
+    createBoard() {
+      console.log('PersonalBoard createBoard')
+      this.$emit('createBoard')
+    },
   },
 }
 </script>

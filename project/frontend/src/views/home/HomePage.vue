@@ -3,27 +3,53 @@
     <PageHeader />
 
     <div class="board-container">
-      <PersonalBoards />
-      <TeamBoards />
+      <PersonalBoards @createBoard="createBoard" />
+      <TeamBoards @createBoard="createBoard" />
       <div class="create-team-wrapper">
         <button class="btn btn-link" @click="createTeam()">
           + 팀 생성하기
         </button>
       </div>
     </div>
+
+    <!-- 보드 생성 모달 (개인보드, 팀보드) -->
+    <CreateBoardModal :teamId="selectedTeamId" />
+
+    <!-- 팀 생성 모달 -->
+    <CreateTeamModal />
   </div>
 </template>
 
 <script>
+import $ from 'jquery'
 import PageHeader from '@/components/public/PageHeader'
 import PersonalBoards from '@/views/home/PersonalBoards'
 import TeamBoards from '@/views/home/TeamBoards'
+import CreateBoardModal from '@/modals/CreateBoardModal'
+import CreateTeamModal from '@/modals/CreateTeamModal'
 
 export default {
   name: 'HomePage',
-  components: { TeamBoards, PersonalBoards, PageHeader },
+  components: {
+    CreateTeamModal,
+    CreateBoardModal,
+    TeamBoards,
+    PersonalBoards,
+    PageHeader,
+  },
+  data() {
+    return {
+      selectedTeamId: 0,
+    }
+  },
   methods: {
-    createTeam() {},
+    createTeam() {
+      $('#createTeamModal').modal('show')
+    },
+    createBoard(team) {
+      this.selectedTeamId = team ? team.id : 0
+      $('#createBoardModal').modal('show')
+    },
   },
 }
 </script>
